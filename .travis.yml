@@ -26,7 +26,7 @@ deploy:
   region: us-east-1
   role: arn:aws:iam::899084149499:role/lambda_basic_execution
   runtime: python3.6
-  handler_name: lambda_handler
+  handler_name: lambda_function.lambda_handler
   zip: dist/latest.zip
 
 #notifications:
