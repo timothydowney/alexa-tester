@@ -13,7 +13,7 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - pytest tests/unit/tests_lambda.py
+  - pytest tests/tests_lambda.py
 
 before_deploy:
   - make
@@ -30,5 +30,8 @@ deploy:
   handler_name: lambda_handler
   zip: dist/latest.zip
 
+# By default emails go to committers & authors
 #notifications:
-#  email: true
+#  email:
+#    recipients:
+#      - timothy.downey@gmail.com

@@ -10,7 +10,7 @@ build_dist:
 	mkdir dist
 
 copy:
-	cp -R src/* build/
+	cp -R alexa/* build/
 
 zip: build_dist
 	cd build && zip -r ../dist/lambda.zip .
