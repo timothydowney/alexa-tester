@@ -1,11 +1,17 @@
 language: python
+
 python:
   - "3.6"
-# command to install dependencies
+
+env:
+  global:
+    - AWS_DEFAULT_REGION=us-east-1
+    #- PYTHONPATH=$TRAVIS_BUILD_DIR:$PYTHONPATH
+
 install:
   - pip install pytest
   - pip install -r requirements.txt
-# command to run tests
+
 script:
   - pytest tests/unit/tests_lambda.py
 
@@ -13,4 +19,15 @@ before_deploy:
   - make
   - mv dist/lambda.zip dist/latest.zip
   - cp dist/latest.zip dist/$TRAVIS_COMMIT.zip
-  
+
+deploy:
+  provider: lambda
+  function_name: alexa-tester
+  region: us-east-1
+  role: arn:aws:iam::899084149499:role/lambda_basic_execution
+  runtime: python3.6
+  handler_name: lambda_handler
+  zip: dist/latest.zip
+
+#notifications:
+#  email: true
